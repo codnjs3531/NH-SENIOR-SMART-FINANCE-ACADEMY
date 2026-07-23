@@ -509,7 +509,9 @@ footer small{
 
 .hero-overlay h1{
 
-    font-size:28px;
+    font-size:24px;
+
+    wthie-space:nowrap;
 
 }
 
