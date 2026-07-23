@@ -1,0 +1,115 @@
+// ===========================
+// NH Senior Smart Academy
+// script.js
+// ===========================
+
+
+// 이미지 LightBox
+
+const photos = document.querySelectorAll(".photo img");
+
+const lightbox = document.getElementById("lightbox");
+
+const lightboxImg = document.getElementById("lightbox-img");
+
+const closeBtn = document.getElementById("close");
+
+
+
+photos.forEach(photo => {
+
+    photo.addEventListener("click", () => {
+
+        lightbox.style.display = "flex";
+
+        lightboxImg.src = photo.src;
+
+    });
+
+});
+
+
+
+closeBtn.addEventListener("click", () => {
+
+    lightbox.style.display = "none";
+
+});
+
+
+
+lightbox.addEventListener("click", (e)=>{
+
+    if(e.target===lightbox){
+
+        lightbox.style.display="none";
+
+    }
+
+});
+
+
+
+// 스크롤 시 자연스럽게 나타나는 애니메이션
+
+const observer = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:0.15
+});
+
+
+
+document.querySelectorAll("section").forEach(section=>{
+
+    section.classList.add("fade");
+
+    observer.observe(section);
+
+});
+
+
+
+// 사진 확대 Hover(모바일 제외)
+
+if(window.innerWidth>768){
+
+    photos.forEach(photo=>{
+
+        photo.addEventListener("mouseenter",()=>{
+
+            photo.style.transform="scale(1.05)";
+
+        });
+
+        photo.addEventListener("mouseleave",()=>{
+
+            photo.style.transform="scale(1)";
+
+        });
+
+    });
+
+}
+
+
+
+// 맨 위로 부드럽게 이동
+
+window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+});
